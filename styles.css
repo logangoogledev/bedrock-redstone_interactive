@@ -1,0 +1,244 @@
+:root {
+  --bg: #0b1019;
+  --panel: #121a26;
+  --panel-2: #192a3f;
+  --text: #e5eef5;
+  --muted: #9db4c8;
+  --border: #2a3d57;
+  --accent: #ffb547;
+  --accent2: #66ccff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at top left, #16273d 0%, #050a11 40%, #070e1c 100%);
+}
+
+.app-shell {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+header {
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  background: linear-gradient(160deg, #1e2941, #0f1829);
+  border: 1px solid var(--border);
+  padding: 1rem 1.1rem;
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(1.7rem, 2.8vw, 2.2rem);
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+header p {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.component-palette {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+  gap: 0.4rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 0.6rem;
+  border-radius: 0.7rem;
+  min-height: 96px;
+}
+
+.palette-button {
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  padding: 0.5rem 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  background: #1f324c;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.86rem;
+  text-align: center;
+  transition: transform 120ms ease, filter 120ms ease;
+}
+
+.palette-button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.palette-button.selected {
+  border-color: var(--accent);
+  background: linear-gradient(120deg, rgba(255, 172, 44, 0.16), rgba(45, 106, 175, 0.4));
+  box-shadow: 0 0 0 2px rgba(255, 177, 71, 0.22);
+}
+
+.controls .actions,
+.controls .examples {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  padding: 0.75rem;
+  border-radius: 0.7rem;
+  border: 1px solid var(--border);
+  background: linear-gradient(170deg, #16273a, #10203b);
+}
+
+.controls label,
+.controls select,
+.controls button {
+  color: var(--text);
+  font-size: 0.88rem;
+}
+
+.controls select,
+.controls button {
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.42rem 0.65rem;
+  background: #1f324c;
+  cursor: pointer;
+}
+
+.info-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.info-panel > div {
+  border: 1px solid var(--border);
+  background: #151f2f;
+  border-radius: 0.7rem;
+  padding: 0.9rem;
+}
+
+.info-panel strong {
+  color: var(--accent2);
+}
+
+.info-panel p,
+.info-panel ul {
+  margin: 0.4rem 0 0;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.info-panel ul li {
+  margin-bottom: 0.3rem;
+}
+
+.grid-wrapper {
+  width: min(100%, 920px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+#threeCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cell {
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(42, 58, 80, 0.95);
+  background: #1d2c3f;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  border-radius: 0.1rem;
+  box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.6), 0 1px 1px rgba(255, 255, 255, 0.06);
+}
+
+.cell::before,
+.cell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transform-origin: center;
+  z-index: -1;
+}
+
+.cell::before {
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.3));
+  transform: translateZ(4px) rotateX(92deg);
+}
+
+.cell::after {
+  background: linear-gradient(160deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.6));
+  transform: translateZ(4px) rotateY(-92deg);
+}
+
+.cell.powered {
+  box-shadow: inset 0 0 1rem rgba(255, 192, 90, 0.6), 0 0 12px rgba(255, 200, 80, 0.5);
+}
+
+.cell .power-caption {
+  position: absolute;
+  bottom: 0.14rem;
+  right: 0.16rem;
+  font-size: 0.58rem;
+  color: #ffe8a8;
+  font-weight: bold;
+}
+
+.cell.component-redstone_dust { background-image: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/20/Redstone_Dust_JE4_BE1.png'); background-size: cover; }
+.cell.component-lever_off { background-image: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/a/ad/Lever_%28item%29_JE1_BE1.png'); background-size: cover; }
+.cell.component-lever_on { background-image: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/a/ad/Lever_%28item%29_JE1_BE1.png'); background-size: cover; filter: brightness(1.2); }
+.cell.component-button_off { background-image: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/c6/Stone_Button_JE5_BE2.png'); background-size: cover; }
+.cell.component-button_on { background-image: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/c6/Stone_Button_JE5_BE2.png'); background-size: cover; filter: brightness(1.15); }
+.cell.component-torch { background-image: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/2f/Redstone_Torch_Off_JE2_BE1.png'); background-size: cover; }
+.cell.component-torch.powered { background-image: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/e/e1/Redstone_Torch_On_JE2_BE1.png'); }
+.cell.component-repeater_n,.cell.component-repeater_e,.cell.component-repeater_s,.cell.component-repeater_w { background-image: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/e/ec/Repeater_%28off%29_JE4_BE1.png'); background-size: cover; }
+.cell.component-comparator_n,.cell.component-comparator_e,.cell.component-comparator_s,.cell.component-comparator_w { background-image: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/5/5e/Comparator_%28off%29_JE2_BE1.png'); background-size: cover; }
+.cell.component-observer_n,.cell.component-observer_e,.cell.component-observer_s,.cell.component-observer_w { background-image: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/5/5b/Observer_Front_JE1_BE2.png'); background-size: cover; }
+.cell.component-lamp { background-image: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/0/0f/Redstone_Lamp_Off_JE4_BE2.png'); background-size: cover; }
+.cell.component-lamp.powered { background-image: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/0/01/Redstone_Lamp_On_JE4_BE2.png'); }
+.cell.component-solid_block { background-image: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/5/5f/Stone_JE3_BE2.png'); background-size: cover; }
+.cell.component-piston_n,.cell.component-piston_e,.cell.component-piston_s,.cell.component-piston_w { background-image: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/71/Piston_%28off%29_JE6_BE2.png'); background-size: cover; }
+.cell.component-sticky_piston_n,.cell.component-sticky_piston_e,.cell.component-sticky_piston_s,.cell.component-sticky_piston_w { background-image: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/2f/Sticky_Piston_%28off%29_JE6_BE2.png'); background-size: cover; }
+.cell.component-piston_head { background-image: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/1/16/Piston_Extended_%28front%29_JE5_BE2.png'); background-size: cover; }
+
+footer {
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+@media (max-width: 880px) {
+  .controls {
+    grid-template-columns: 1fr;
+  }
+  .grid-wrapper {
+    width: 100%;
+  }
+}

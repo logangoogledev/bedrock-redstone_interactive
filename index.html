@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bedrock Redstone Interactive</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header>
+        <h1>Bedrock Redstone Interactive</h1>
+        <p>
+          Build and simulate 3D bedrock redstone circuits with stacked blocks, pistons, observers, and comparator logic.
+          Use mouse to orbit camera, left-click to place, right-click to remove. Drag to rotate components.
+        </p>
+      </header>
+
+      <section class="controls">
+        <div class="component-palette" id="palette"></div>
+        <div class="actions">
+          <button id="clearProject" title="Clear the grid">Clear grid</button>
+          <button id="resetCircuit" title="Re-run simulation">Update circuit</button>
+          <label for="gridSize">Grid size:</label>
+          <select id="gridSize">
+            <option value="12">12x12</option>
+            <option value="15" selected>15x15</option>
+            <option value="20">20x20</option>
+          </select>
+          <button id="copyBlueprint">Copy blueprint</button>
+          <button id="pasteBlueprint">Paste blueprint</button>
+        </div>
+        <div class="examples">
+          <label for="exampleSelect">Example circuit:</label>
+          <select id="exampleSelect"></select>
+          <button id="loadExample">Load Example</button>
+        </div>
+      </section>
+
+      <section class="info-panel">
+        <div>
+          <strong>Controls</strong>
+          <ul>
+            <li>Mouse drag to orbit camera around the grid.</li>
+            <li>Left click on a block to place the selected component on top.</li>
+            <li>Right click on a block to remove the top component.</li>
+            <li>Shift + click to rotate direction-aware components.</li>
+          </ul>
+        </div>
+        <div>
+          <strong>Learning goal</strong>
+          <p>
+            Use levers as input power, dust to transport current, repeaters to
+            direct signals, torches as inverters, and lamps to show outputs.
+          </p>
+        </div>
+      </section>
+
+      <section class="grid-wrapper">
+        <canvas id="threeCanvas"></canvas>
+      </section>
+
+      <footer>
+        <p>
+          3D Bedrock redstone simulator with true block stacking. Orbit with mouse, place/remove with clicks.
+        </p>
+      </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
